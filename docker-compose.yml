@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx_logs:/var/log/nginx
+      - ./nginx_conf:/etc/nginx/conf.d
+    networks:
+      custom_network:
+        ipv4_address: 172.20.8.2
+
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.8.0/24
